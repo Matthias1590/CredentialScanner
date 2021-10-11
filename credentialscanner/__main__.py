@@ -3,9 +3,11 @@ import glob
 
 files = {}
 for file in glob.glob("*"):
-    print(file)
-    with open(file, "r") as f:
-        files[file] = f.read()
+    try:
+        with open(file, "r") as f:
+            files[file] = f.read()
+    except IsADirectoryError:
+        pass
 
 foundCredentials = False
 
