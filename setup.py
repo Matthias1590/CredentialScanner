@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name="credentialscanner",
-    version="1.0.0",
+    version="1.1.0",
     description="A python module to make sure that no sensitive information gets published when commiting to git.",
     long_description=readme(),
     long_description_content_type="text/markdown",

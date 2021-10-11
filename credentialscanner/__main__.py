@@ -1,11 +1,27 @@
 import sys
+import glob
 
-with open(sys.argv[1], "r") as f:
-    content = f.read()
+os.path.walk()
 
-lines = content.splitlines()
+files = {}
+for file in glob.glob("*"):
+    with open(file, "r") as f:
+        files[file] = f.read()
 
-for line in range(len(lines)):
-    for credential in sys.argv[2:]:
-        if credential.strip() in lines[line]:
-            raise Exception(f"Found credentials on line {line + 1}.")
+foundCredentials = False
+
+for file in files:
+    print("Scanning file \'" + file + "\'.")
+
+    lines = files[file].splitlines()
+
+    for line in range(len(lines)):
+        for credential in sys.argv[1:]:
+            if credential.strip() in lines[line]:
+                foundCredentials = True
+                print(f"Found credentials in file {file} on line {line + 1}.")
+    
+    print()
+
+if foundCredentials:
+    raise Exception("Credentials were found.")
