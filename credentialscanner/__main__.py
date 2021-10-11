@@ -2,15 +2,21 @@ import sys
 import glob
 
 files = {}
-for file in glob.glob("*"):
-    try:
-        with open(file, "r") as f:
-            try:
-                files[file] = f.read()
-            except UnicodeDecodeError:
-                pass
-    except IsADirectoryError:
-        pass
+
+def addFiles(dir: str) -> None:
+    global files
+
+    for file in glob.glob(dir + "/*"):
+        try:
+            with open(dir + "/" + file, "r") as f:
+                try:
+                    files[dir + "/" + file] = f.read()
+                except UnicodeDecodeError:
+                    pass
+        except IsADirectoryError:
+            addFiles(file)
+
+addFiles(".")
 
 foundCredentials = False
 
