@@ -1,8 +1,6 @@
 import sys
 import glob
 
-os.path.walk()
-
 files = {}
 for file in glob.glob("*"):
     with open(file, "r") as f:
