@@ -3,6 +3,7 @@ import glob
 
 files = {}
 for file in glob.glob("*"):
+    print(file)
     with open(file, "r") as f:
         files[file] = f.read()
 
