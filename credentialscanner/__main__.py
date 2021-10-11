@@ -8,9 +8,9 @@ def addFiles(dir: str) -> None:
 
     for file in glob.glob(dir + "/*"):
         try:
-            with open(dir + "/" + file, "r") as f:
+            with open(file, "r") as f:
                 try:
-                    files[dir + "/" + file] = f.read()
+                    files[file] = f.read()
                 except UnicodeDecodeError:
                     pass
         except IsADirectoryError:
