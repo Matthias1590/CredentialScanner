@@ -5,7 +5,10 @@ files = {}
 for file in glob.glob("*"):
     try:
         with open(file, "r") as f:
-            files[file] = f.read()
+            try:
+                files[file] = f.read()
+            except UnicodeDecodeError:
+                pass
     except IsADirectoryError:
         pass
 
